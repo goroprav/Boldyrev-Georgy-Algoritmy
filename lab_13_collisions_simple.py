@@ -17,63 +17,39 @@ t = np.arange(0, years*seconds_in_year, 0.5*seconds_in_day)
 def move_func(s, t):
     (x1, v_x1, y1, v_y1,
      x2, v_x2, y2, v_y2,
-     x3, v_x3, y3, v_y3)=s
+     x3, v_x3, y3, v_y3) = s
 
-    # Динамика первого тела под влиянием второго, третьего и четвертого
+    # Динамика первого тела под влиянием второго и третьего
     dxdt1 = v_x1
-    dv_xdt1 = - G * m2 * (x1 - x2) / ((x1 - x2)**2 + (y1 - y2)**2)**1.5
-    
-    dydt1 = v_y1
-    dv_ydt1 = - G * m2 * (y1 - y2) / ((x1 - x2)**2 + (y1 - y2)**2)**1.5
-    
-    
+    dv_xdt1 = - G * m2 * (x1 - x2) / ((x1 - x2)**2 + (y1 - y2)**2)**1.5\
+              - G * m3 * (x1 - x3) / ((x1 - x3)**2 + (y1 - y3)**2)**1.5
 
-    # Динамика второго тела под влиянием первого, третьего и четвертого
-    dxdt2 = v_x2
-    dv_xdt2 = - G * m1 * (x2 - x1) / ((x2 - x1)**2 + (y2 - y1)**2)**1.5
-    
-    dydt2 = v_y2
-    dv_ydt2 = - G * m1 * (y2 - y1) / ((x2 - x1)**2 + (y2 - y1)**2)**1.5
-    
-    
-    
-    dxdt3 = v_x3
-    dv_xdt3 = - G * m1 * (x3 - x1) / ((x3 - x1)**2 + (y3 - y1)**2)**1.5
-    
-    dydt3 = v_y3
-    dv_ydt3 = - G * m1 * (y3 - y1) / ((x3 - x1)**2 + (y3 - y1)**2)**1.5
-    
-    
-    
-    dxdt3 = v_x3
-    dv_xdt3 = - G * m2 * (x3 - x2) / ((x3 - x2)**2 + (y3 - y2)**2)**1.5
-    
-    dydt3 = v_y3
-    dv_ydt3 = - G * m2 * (y3 - y2) / ((x3 - x2)**2 + (y3 - y2)**2)**1.5
-    
-    
-    
-    dxdt2 = v_x2
-    dv_xdt2 = - G * m3 * (x2 - x3) / ((x2 - x3)**2 + (y2 - y3)**2)**1.5
-    
-    dydt2 = v_y2
-    dv_ydt2 = - G * m3 * (y2 - y3) / ((x2 - x3)**2 + (y2 - y3)**2)**1.5
-    
-    
-    
-    dxdt1 = v_x1
-    dv_xdt1 = - G * m3 * (x1 - x3) / ((x1 - x3)**2 + (y1 - y3)**2)**1.5
-    
     dydt1 = v_y1
-    dv_ydt1 = - G * m3 * (y1 - y3) / ((x1 - x3)**2 + (y1 - y3)**2)**1.5
-    
-    
-    
+    dv_ydt1 = - G * m2 * (y1 - y2) / ((x1 - x2)**2 + (y1 - y2)**2)**1.5\
+              - G * m3 * (y1 - y3) / ((x1 - x3)**2 + (y1 - y3)**2)**1.5
+
+    # Динамика второго тела под влиянием первого и третьего
+    dxdt2 = v_x2
+    dv_xdt2 = - G * m1 * (x2 - x1) / ((x2 - x1)**2 + (y2 - y1)**2)**1.5\
+              - G * m3 * (x2 - x3) / ((x2 - x3)**2 + (y2 - y3)**2)**1.5
+
+    dydt2 = v_y2
+    dv_ydt2 = - G * m1 * (y2 - y1) / ((x2 - x1)**2 + (y2 - y1)**2)**1.5\
+              - G * m3 * (y2 - y3) / ((x2 - x3)**2 + (y2 - y3)**2)**1.5
+
+    # Динамика третьего тела под влиянием первого и второго
+    dxdt3 = v_x3
+    dv_xdt3 = - G * m1 * (x3 - x1) / ((x3 - x1)**2 + (y3 - y1)**2)**1.5\
+              - G * m2 * (x3 - x2) / ((x3 - x2)**2 + (y3 - y2)**2)**1.5
+
+    dydt3 = v_y3
+    dv_ydt3 = - G * m1 * (y3 - y1) / ((x3 - x1)**2 + (y3 - y1)**2)**1.5\
+              - G * m2 * (y3 - y2) / ((x3 - x2)**2 + (y3 - y2)**2)**1.5
 
     return (dxdt1, dv_xdt1, dydt1, dv_ydt1,
             dxdt2, dv_xdt2, dydt2, dv_ydt2,
             dxdt3, dv_xdt3, dydt3, dv_ydt3)
-            
+
 
 # Определяем начальные значения и параметры
 radius = 5*10**9
@@ -95,7 +71,7 @@ v_y30=-1000
 
 s0 = (x10, v_x10, y10, v_y10,
       x20, v_x20, y20, v_y20,
-      x30,v_x30,y30,v_y30)
+      x30, v_x30, y30, v_y30)
 
 m1 = 1.1 * 10**(28)
 m2 = 1.1 * 10**(28)
@@ -132,7 +108,7 @@ for i in range(len(t)-1):
     v_x20 = sol[1,5]
     y20 = sol[1,6]
     v_y20 = sol[1,7]
-    
+
     x30=sol[1,8]
     v_x30=sol[1,9]
     y30=sol[1,10]
@@ -149,8 +125,8 @@ for i in range(len(t)-1):
 
     s0 = (x10, V_x10, y10, v_y10,
           x20, V_x20, y20, v_y20)
-    
-    
+
+
     r13 = np.sqrt((x10 - x30)**2 + (y10 - y30)**2)
     if r13 <= 2*radius:
         V_x10 = (2 * m3 * v_x30 + v_x10 * (m1 - m3)) / (m1 + m3)
@@ -161,7 +137,7 @@ for i in range(len(t)-1):
 
     s0 = (x10, V_x10, y10, v_y10,
           x30, V_x30, y30, v_y30)
-    
+
     r32 = np.sqrt((x30 - x20)**2 + (y30 - y20)**2)
     if r32 <= 2*radius:
         V_x30 = (2 * m2 * v_x20 + v_x30 * (m3 - m2)) / (m3 + m2)
@@ -171,10 +147,11 @@ for i in range(len(t)-1):
         V_x20 = v_x20
 
     s0 = (x30, V_x30, y30, v_y30,
-          x20, V_x20, y20, v_y20)
-    
-    
-    
+          x20, V_x20, y20, v_y20,
+          x30, v_x30, y30, v_y30)
+
+
+
 
 # Строим решение в виде графика и анимируем
 fig = plt.figure()
@@ -187,7 +164,7 @@ for i in range(0, len(t)-1, 1):
 
     body2, = plt.plot(move_array[i, 2], move_array[i, 3], 'o', color='g', ms=20)
     # body2_line, = plt.plot(move_array[:i, 2], move_array[:i, 3], '-', color='g')
-    
+
     body3, = plt.plot(move_array[i, 4], move_array[i, 5], 'o', color='k', ms=20)
     # body2_line, = plt.plot(move_array[:i, 2], move_array[:i, 3], '-', color='g')
 
@@ -198,3 +175,4 @@ ani = ArtistAnimation(fig, bodys, interval=1)
 plt.axis('equal')
 ani.save('Colissions.gif')
 plt.show()
+
