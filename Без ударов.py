@@ -8,10 +8,10 @@ from matplotlib.animation import ArtistAnimation
 # Временные интервалы
 seconds_in_year = 365 * 24 * 60 * 60
 seconds_in_day = 24 * 60 * 60
-years =2
+years =55
 
 # Определяем переменную величину
-t = np.arange(0, years*seconds_in_year, 5*seconds_in_day)
+t = np.arange(0, years*seconds_in_year,60*seconds_in_day)
 
 # Определяем функцию для системы диф. уравнений
 def move_func(s, t):
@@ -315,16 +315,6 @@ def move_func(s, t):
     
 
 # Определяем начальные значения и параметры
-R1=2.4*10**6
-R2=6*10**6
-R3=6.4*10**6
-R4=3.5*10**6
-R5=0.4
-R6=0.4
-R7=0.4
-R8=0.4
-R9=0.4
-R10=0.4
 
 
 x10 = 59*10**9
@@ -365,12 +355,12 @@ v_y70=6792
 x80=4.5*10**12
 v_x80=0
 y80=0
-v_y80=543.3
+v_y80=4500 
 
-x90=-4.5*10**12
-v_x90=0
-y90=0
-v_y90=0
+x90=4.5*10**12
+v_x90=-2800
+y90=3*10**12
+v_y90=-0
 
 x100=0
 v_x100=0
@@ -397,12 +387,14 @@ m5 = 1.9*10**27
 m6 =  5.7*10**26
 m7 = 8.7*10**25
 m8 = 10**26
-m9 = 2*10**23
+m9 =2*10**29
 m10 = 2*10**30
 G = 6.67 * 10**(-11)
 
 
 sol = odeint(move_func, s0, t)
+
+
              
              
 fig = plt.figure(figsize=(30,30), dpi=100)
@@ -410,34 +402,34 @@ fig = plt.figure(figsize=(30,30), dpi=100)
 bodys = []
 
 for i in range(0, len(t), 1):
-    body1, = plt.plot(sol[i, 0], sol[i, 2], 'o', color='r')
+    body1, = plt.plot(sol[i, 0], sol[i, 2], 'o', color='peru', ms=1.5)
     # body1_line, = plt.plot(move_array[:i, 0], move_array[:i, 1], '-', color='r')
 
-    body2, = plt.plot(sol[i, 4], sol[i, 6], 'o', color='g')
+    body2, = plt.plot(sol[i, 4], sol[i, 6], 'o', color='r', ms=3.1)
     # body2_line, = plt.plot(move_array[:i, 2], move_array[:i, 3], '-', color='g')
 
-    body3, = plt.plot(sol[i, 8], sol[i, 10], 'o', color='k')
+    body3, = plt.plot(sol[i, 8], sol[i, 10], 'o', color='b', ms=3.1)
     # body2_line, = plt.plot(move_array[:i, 2], move_array[:i, 3], '-', color='g')
     
-    body4, = plt.plot(sol[i, 12], sol[i, 14], 'o', color='r')
+    body4, = plt.plot(sol[i, 12], sol[i, 14], 'o', color='r',ms=3)
                       
                       
-    body5, = plt.plot(sol[i, 16], sol[i, 18], 'o', color='r')
+    body5, = plt.plot(sol[i, 16], sol[i, 18], 'o', color='r', ms= 5.5)
     
     
-    body6, = plt.plot(sol[i, 20], sol[i, 22], 'o', color='r')
+    body6, = plt.plot(sol[i, 20], sol[i, 22], 'o', color='r', ms=5)
     
     
-    body7, = plt.plot(sol[i, 24], sol[i, 26], 'o', color='r')
+    body7, = plt.plot(sol[i, 24], sol[i, 26], 'o', color='b', ms=5)
     
     
-    body8, = plt.plot(sol[i, 28], sol[i, 30], 'o', color='r')
+    body8, = plt.plot(sol[i, 28], sol[i, 30], 'o', color='m', ms=5)
     
     
-    body9, = plt.plot(sol[i, 32], sol[i, 34], 'o', color='r')
+    body9, = plt.plot(sol[i, 32], sol[i, 34], 'o', color='r', ms=2.5)
     
     
-    body10, = plt.plot(sol[i, 36], sol[i, 38], 'o', color='r')
+    body10, = plt.plot(sol[i, 36], sol[i, 38], 'o', color='y', ms=9)
                       
 
     bodys.append([body1, body2, body3, body4, body5, body6, body7, body8, body9, body10])
@@ -446,7 +438,7 @@ ani = ArtistAnimation(fig, bodys, interval=0.07 )
 
 plt.axis('equal')
 
-ani.save('ПЛАНЕТЫ.gif')
+ani.save('Пнананан .gif')
 plt.show()
 
              
