@@ -13,7 +13,7 @@ void main()
     int k, chet;
     chet = 0;
     char N;
-    std::ifstream fin("mas.txt");
+    std::ifstream fin("lab12.txt");
     std::ofstream aa("A.txt");   //записываем записи в А
     std::ofstream bb("B.txt");  //записываем записи в В
 
