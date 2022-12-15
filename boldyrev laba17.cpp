@@ -119,7 +119,7 @@ void DELETE(int data, Elem*& root) // Функция удаления
 int main()
 {
     Elem* root = nullptr;
-    std::ifstream in("input.txt"); //Чтение файла в котором заданы команды
+    std::ifstream in("lab17.txt"); //Чтение файла в котором заданы команды
     char a;
     int b;
     while (!in.eof())
